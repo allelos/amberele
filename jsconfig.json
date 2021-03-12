@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@context/*": ["context/*"],
+      "@dataSource/*": ["dataSource/*"],
+      "@ui-kit/*": ["ui-kit/*"],
+      "@organisms/*": ["organisms/*"],
+      "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils/*"]
+    }
+  }
+}

@@ -1,65 +1,71 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Layout from "@components/layout"
+import Seo from "@components/seo"
+import Hero from "@organisms/hero"
+import Intro from "@organisms/intro"
+import Collection from "@organisms/collection"
+import KnowUsBetter from "@organisms/knowUsBetter"
+import { getCollectionById, parseResponse } from "@dataSource/index"
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+const title = "Opulence meets bohemian"
+const subtitle = "Enhance your style with our luxurious, sophisticated & handcrafted creations"
+const buttonLabel = "ΑΓΟΡΑ ΤΩΡΑ"
+const link = "/products"
+const imageSrc = "/assets/images/hero.jpg"
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+const introTitle = "Χειροποίητες macrame τσάντες για κάθε τύπο γυναίκας"
+const introSubtitle = "Ένα αξεσουάρ που δεν αποχωρίζεται ποτέ μια γυναίκα"
+const introText =
+  "Η Amberele δημιουργεί μοναδικά κομμάτια εμπνευσμένα από την Ελληνική κουλτούρα, σε boho-chic γραμμές με έναν μοναδικό και περίτεχνο τρόπο, χρησιμοποιώντας την τέχνη του μακραμέ και 100% οργανικά υλικά."
+const introLabel = "Ανακαλυψε ολες τις τσάντες"
+const introImageSrc = "/assets/images/intro.jpg"
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+const collectionTitle = "Υψηλής ποιότητας πλεκτές macrame τσάντες"
+const collectionSubtitle =
+  "Συνεχώς εξελισσόμαστε και δημιουργούμε καινούργιες γραμμές, που θα λατρέψει η κάθε γυναίκα."
+const collectionFooter = "Ανακάλυψε όλες τις τσάντες"
+const collectionLabel = "Δες ολη την συλλογή"
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+const Index = ({ items, pageTitle }) => (
+  <Layout sticky={false}>
+    <Seo title={pageTitle} />
+    <Hero
+      imageSrc={imageSrc}
+      title={title}
+      subtitle={subtitle}
+      buttonLabel={buttonLabel}
+      link={link}
+    />
+    <Intro
+      imageSrc={introImageSrc}
+      title={introTitle}
+      subtitle={introSubtitle}
+      text={introText}
+      link={link}
+      label={introLabel}
+    />
+    <Collection
+      items={items}
+      title={collectionTitle}
+      subtitle={collectionSubtitle}
+      footer={collectionFooter}
+      link={link}
+      label={collectionLabel}
+    />
+    <KnowUsBetter />
+  </Layout>
+)
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+export default Index
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+export const getStaticProps = async () => {
+  const res = await getCollectionById("Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzE3MjI1NzgzNzE0Mg==")
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+  const { products } = parseResponse(res, null)
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+  return {
+    props: {
+      items: products,
+      pageTitle: "Bohemian World | Χειροποίητες Μακραμέ τσάντες & Αξεσουάρ"
+    }
+  }
 }
