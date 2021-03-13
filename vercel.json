@@ -9,5 +9,11 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/about-us",
+      "destination": "/aboutus"
+    }
   ]
 }
