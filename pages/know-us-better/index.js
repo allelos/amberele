@@ -3,16 +3,18 @@ import Image from "next/image"
 import Layout from "@components/layout"
 import Seo from "@components/seo"
 import Flex from "@components/flex"
-import { Text, Huge } from "@components/typography"
+import { Text } from "@components/typography"
 import Section from "@organisms/knowUsBetter/section"
 import TextWrapper from "@organisms/knowUsBetter/textWrapper"
+import Main from "@organisms/knowUsBetter/main"
+import Title from "@organisms/knowUsBetter/title"
 import { getProducts, parseResponse } from "@dataSource/index"
 
 const RelatedProducts = dynamic(() => import("@organisms/relatedProducts"))
 
 const sections = [
   {
-    image: { src: "/assets/images/know_us_better_1.jpg", width: 512, height: 768 },
+    image: { src: "/assets/images/know_us_better_1.jpg", width: 480, height: 640 },
     content: [
       `Η συνάντηση της Amberele και του μακραμέ, έγινε κάπως απρόσμενα, ένα καλοκαίρι.
   Κάπου εκεί σκέφτηκα να δημιουγήσω για κάθε γυναίκα και κάθε στυλ μοναδικές
@@ -70,14 +72,7 @@ const OurStory = ({ relatedProducts }) => {
   return (
     <Layout>
       <Seo title={seoTitle} description={seoDescription} image={seoImage} />
-      <Flex
-        as="main"
-        column
-        gap={32}
-        width={{ width: "100%", max: "1280px" }}
-        margin={["auto"]}
-        padding={[0, 0, 32]}
-      >
+      <Main>
         <Image
           src="/assets/images/know_us_better_2.jpg"
           alt="know-us-better-hero"
@@ -85,14 +80,14 @@ const OurStory = ({ relatedProducts }) => {
           height={768}
           objectFit="cover"
         />
-        <Huge serif>Γνώρισε μας καλύτερα</Huge>
+        <Title>
+          Γνώρισε μας καλύτερα
+        </Title>
         {sections.map(({ image, content }, index) => (
           <Section key={index} flexWrap={index % 2 ? "reverse" : true}>
             <Flex order={index % 2}>
               <Image
-                src={image.src}
-                width={image.width}
-                height={image.height}
+                {...image}
                 alt={`know-us-better-${index}`}
                 objectFit="cover"
               />
@@ -107,7 +102,7 @@ const OurStory = ({ relatedProducts }) => {
           </Section>
         ))}
         <RelatedProducts items={relatedProducts} />
-      </Flex>
+      </Main>
     </Layout>
   )
 }
