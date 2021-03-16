@@ -11,7 +11,7 @@ const RelatedProducts = ({ title, items }) => {
     spacing: 16,
     breakpoints: {
       "(max-width: 768px)": {
-        slidesPerView: 1
+        slidesPerView: 2
       }
     }
   })

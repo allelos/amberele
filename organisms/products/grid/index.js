@@ -11,7 +11,7 @@ const Grid = styled(Flex)`
   }
 
   @media (max-width: 475px) {
-    grid-template-columns: 1fr;
+    gap: 24px;
   }
 `
 
