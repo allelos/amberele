@@ -1,4 +1,6 @@
+import { renderToString } from "react-dom/server"
 import dynamic from "next/dynamic"
+import Link from "next/link"
 import Image from "next/image"
 import Layout from "@components/layout"
 import Seo from "@components/seo"
@@ -11,6 +13,15 @@ import Title from "@organisms/knowUsBetter/title"
 import { getProducts, parseResponse } from "@dataSource/index"
 
 const RelatedProducts = dynamic(() => import("@organisms/relatedProducts"))
+
+const getLink = (href, link) =>
+  renderToString(
+    <Link href={href} passHref>
+      <Text as="a" underline>
+        {link}
+      </Text>
+    </Link>
+  )
 
 const sections = [
   {
@@ -33,7 +44,10 @@ const sections = [
       `Οι επιρροές ήταν πολλές και μοναδικές, όπως μερικά ταξίδια σε ακρώς bohemian
       προορισμούς.`,
       `Εκεί ανακάλυψα το μακραμέ και έτσι η amberele "γεννήθηκε" μέσα από τα ταξίδια της.
-      Σε ένα από αυτά γεννήθηκε και η ιδέα της Circe, όπου αναμφίβολλα την έχετε βάλει
+      Σε ένα από αυτά γεννήθηκε και η ιδέα της ${getLink(
+        "/products/circe-macrame-bag",
+        "Circe"
+      )}, όπου αναμφίβολλα την έχετε βάλει
       όλες στην καρδιά σας.`,
       `Η αγάπη μου για την amberele και για τη γυναίκα μου δίνει δύναμη για να δημιουργώ
       μοναδικά κομμάτια που θα σας χαρίσουν μοναδικές στιγμές.`
@@ -80,23 +94,15 @@ const OurStory = ({ relatedProducts }) => {
           height={768}
           objectFit="cover"
         />
-        <Title>
-          Γνώρισε μας καλύτερα
-        </Title>
+        <Title>Γνώρισε μας καλύτερα</Title>
         {sections.map(({ image, content }, index) => (
           <Section key={index} flexWrap={index % 2 ? "reverse" : true}>
             <Flex order={index % 2}>
-              <Image
-                {...image}
-                alt={`know-us-better-${index}`}
-                objectFit="cover"
-              />
+              <Image {...image} alt={`know-us-better-${index}`} objectFit="cover" />
             </Flex>
             <TextWrapper order={0}>
               {content.map((text, index) => (
-                <Text key={`content-${index}`} light>
-                  {text}
-                </Text>
+                <Text key={`content-${index}`} light dangerouslySetInnerHTML={{ __html: text }} />
               ))}
             </TextWrapper>
           </Section>
