@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react"
+import { addToCartGAEvent } from "@components/googleAnalytics/gaEvents"
 
 const getExistingCheckoutId = () => localStorage.getItem("checkoutId")
 const setCheckoutId = id => localStorage.setItem("checkoutId", id)
@@ -39,13 +40,15 @@ const useCheckout = () => {
   }, [])
 
   const postItem = useCallback((id, item, callback) => {
+    const { variantId, name, price, quantity } = item
     setLoading(true)
     fetch(`/api/checkout/${id}/add`, {
       method: "POST",
-      body: JSON.stringify({ item })
+      body: JSON.stringify({ item: { variantId, quantity } })
     })
       .then(res => res.json())
       .then(handleSuccess({ setLoading, callback }))
+      .then(() => addToCartGAEvent({ name, price, quantity }))
       .catch(handleError({ setLoading }))
   }, [])
 
