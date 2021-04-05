@@ -23,7 +23,7 @@ const Cart = ({ open, onToggle }) => {
   } = useMemo(() => checkout, [checkout])
 
   const isEmpty = useMemo(() => !Boolean(lineItems.length), [lineItems])
-  const [{ code } = {}] = discountApplications
+  const [{ code, title: automaticCode } = {}] = discountApplications
 
   return (
     <Sidebar open={open} onToggle={onToggle}>
@@ -39,10 +39,10 @@ const Cart = ({ open, onToggle }) => {
                 <CartDetails
                   subtotalPrice={subtotalPrice}
                   totalPrice={totalPrice}
-                  code={code}
+                  code={code || automaticCode}
                   removeDiscount={removeDiscount}
                 />
-                {!code && <CartDiscount addDiscount={addDiscount} discountCode={code} />}
+                {!code && !automaticCode && <CartDiscount addDiscount={addDiscount} discountCode={code || automaticCode} />}
                 <Button as="a" href={webUrl} width="100%">
                   ΟΛΟΚΛΗΡΩΣΕ ΤΗΝ ΠΑΡΑΓΓΕΛΙΑ ΣΟΥ
                 </Button>
