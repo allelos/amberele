@@ -27,7 +27,10 @@ const Faq = () => (
         <Text>
           Όλα τα προϊόντα μας περνάνε από αυστηρό ποιοτικό έλεγχο καθώς κατασκευάζονται στο χέρι με
           μεγάλο σεβασμό και πολλή προσοχή. Αν ωστόσο αντιμετωπίσετε κάποιο πρόβλημα, παρακαλώ
-          επικοινωνήστε μαζί μας στο <a href="mailto:contact@amberele.com">contact@amberele.com</a>{" "}
+          επικοινωνήστε μαζί μας στο{" "}
+          <Text as="a" href="mailto:contact@amberele.com" underline color="secondary">
+            contact@amberele.com
+          </Text>{" "}
           και θας σας ενημερώσουμε για την κάθε ενέργεια που πρέπει να γίνει.
         </Text>
         <Text strong>Πώς μπορώ να επιστρέψω ένα προϊόν;</Text>

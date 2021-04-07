@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic"
 import Layout from "@components/layout"
 import Seo from "@components/seo"
 import Hero from "@organisms/hero"
@@ -5,6 +6,8 @@ import Intro from "@organisms/intro"
 import Collection from "@organisms/collection"
 import KnowUsBetter from "@organisms/knowUsBetter"
 import { getCollectionById, parseResponse } from "@dataSource/index"
+
+const Faq = dynamic(() => import("@organisms/faq"))
 
 const title = "Opulence meets bohemian"
 const subtitle = "Enhance your style with our luxurious, sophisticated & handcrafted creations"
@@ -52,6 +55,7 @@ const Index = ({ items, pageTitle }) => (
       label={collectionLabel}
     />
     <KnowUsBetter />
+    <Faq />
   </Layout>
 )
 
