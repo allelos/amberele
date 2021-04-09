@@ -18,6 +18,10 @@ const Seo = ({ title, description = seoDescription, image = seoImageSrc }) => {
   return (
     <Head>
       <title>{getTitle}</title>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      />
       <meta name="description" content={getDescription} />
       <meta property="og:title" content={getTitle} />
       <meta property="og:description" content={getDescription} />
