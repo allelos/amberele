@@ -10,14 +10,12 @@ const wrapper = css`
   outline: 0;
 `
 
-const Select = ({ label, options = [], onChange, children, ...rest }) => {
+const Select = ({ label, name, onChange, children, ...rest }) => {
   return (
-    <Flex column gap={2} {...rest}>
-      <Text as="label" small>
-        {label}
-      </Text>
+    <Flex as="label" column gap={1} {...rest}>
+      <Text small>{label}</Text>
       <Flex position="relative" alignItems="center">
-        <Flex as="select" flex padding={[2]} onChange={onChange} css={wrapper}>
+        <Flex as="select" name={name} flex padding={[2]} onChange={onChange} css={wrapper}>
           {children}
         </Flex>
         <Icon name="chevron" small />
