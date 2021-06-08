@@ -4,13 +4,19 @@ import { addToCartGAEvent } from "@components/googleAnalytics/gaEvents"
 const getExistingCheckoutId = () => localStorage.getItem("checkoutId")
 const setCheckoutId = id => localStorage.setItem("checkoutId", id)
 
-const handleSuccess = ({ setLoading, callback }) => checkout => {
-  setLoading(false)
-  callback(checkout)
+const handleResponse = res => {
+  if (!res.ok) throw res
+  return res.json()
 }
-const handleError = ({ setLoading }) => () => {
+
+const handleSuccess = ({ setLoading, callback }) => checkout => { 
+  setLoading(false) 
+  callback(checkout) 
+}
+
+const handleError = ({ setLoading }) => e => {
   setLoading(false)
-  console.log("something went wrong")
+  console.log("something went wrong", e)
 }
 
 const useCheckout = () => {
@@ -19,7 +25,7 @@ const useCheckout = () => {
   const createCheckout = useCallback(callback => {
     setLoading(true)
     fetch("/api/checkout/create")
-      .then(res => res.json())
+      .then(handleResponse)
       .then(checkout => {
         setLoading(false)
         const { completedAt, id } = checkout
@@ -34,9 +40,12 @@ const useCheckout = () => {
   const fetchCheckout = useCallback((id, callback) => {
     setLoading(true)
     fetch(`/api/checkout/${id}`)
-      .then(res => res.json())
+      .then(handleResponse)
       .then(handleSuccess({ setLoading, callback }))
-      .catch(handleError({ setLoading }))
+      .catch(({ status, ...e }) => {
+        const errorCallback = handleError({ setLoading })
+        status === 410 ? createCheckout(callback) : errorCallback({ status, ...e })
+      })
   }, [])
 
   const postItem = useCallback((id, item, callback) => {
@@ -46,7 +55,7 @@ const useCheckout = () => {
       method: "POST",
       body: JSON.stringify({ item: { variantId, quantity } })
     })
-      .then(res => res.json())
+      .then(handleResponse)
       .then(handleSuccess({ setLoading, callback }))
       .then(() => addToCartGAEvent({ name, price, quantity }))
       .catch(handleError({ setLoading }))
@@ -58,7 +67,7 @@ const useCheckout = () => {
       method: "POST",
       body: JSON.stringify({ item })
     })
-      .then(res => res.json())
+      .then(handleResponse)
       .then(handleSuccess({ setLoading, callback }))
       .catch(handleError({ setLoading }))
   }, [])
@@ -69,7 +78,7 @@ const useCheckout = () => {
       method: "POST",
       body: JSON.stringify({ itemId })
     })
-      .then(res => res.json())
+      .then(handleResponse)
       .then(handleSuccess({ setLoading, callback }))
       .catch(handleError({ setLoading }))
   }, [])
@@ -80,7 +89,7 @@ const useCheckout = () => {
       method: "POST",
       body: JSON.stringify({ code })
     })
-      .then(res => res.json())
+      .then(handleResponse)
       .then(handleSuccess({ setLoading, callback }))
       .catch(handleError({ setLoading }))
   })
@@ -88,7 +97,7 @@ const useCheckout = () => {
   const removeDiscount = useCallback((id, callback) => {
     setLoading(true)
     fetch(`/api/checkout/${id}/discounts/delete`)
-      .then(res => res.json())
+      .then(handleResponse)
       .then(handleSuccess({ setLoading, callback }))
       .catch(handleSuccess({ setLoading }))
   })
