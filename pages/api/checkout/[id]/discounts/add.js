@@ -5,8 +5,8 @@ export default async ({ query, body }, res) => {
     const { id } = query
     const { code } = JSON.parse(body)
     const checkout = await addDiscount(id, code)
-    res.json(checkout)
+    res.status(200).json(checkout)
   } catch (e) {
-    res.json(e)
+    res.status(400).json(e)
   }
 }
