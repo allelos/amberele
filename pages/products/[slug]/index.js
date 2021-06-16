@@ -41,7 +41,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
   const { src: seoImage } = image
   const seoTitle = `Χειροποίητες Τσάντες | ${title}`
 
-  return { props: { product, relatedProducts, seoTitle, seoImage, seoDescription } }
+  return { props: { product, relatedProducts, seoTitle, seoImage, seoDescription }, revalidate: 60 }
 }
 
 export default ProductPage

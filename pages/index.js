@@ -70,6 +70,7 @@ export const getStaticProps = async () => {
     props: {
       items: products,
       pageTitle: "Bohemian World | Χειροποίητες Μακραμέ τσάντες & Αξεσουάρ"
-    }
+    },
+    revalidate: 60
   }
 }

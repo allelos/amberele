@@ -124,7 +124,7 @@ export const getStaticProps = async () => {
     []
   )
 
-  return { props: { relatedProducts } }
+  return { props: { relatedProducts }, revalidate: 60 }
 }
 
 export default OurStory
