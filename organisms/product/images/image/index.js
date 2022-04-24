@@ -9,14 +9,12 @@ const Container = styled(Flex)`
   transition: opacity 500ms ease-in-out;
 `
 
-const ProductImage = ({ imageSrc, visible }) => {
-  const alt = "main-product-image"
+const alt = "main-product-image"
 
-  return (
-    <Container show={visible} height={{ min: "480px" }}>
-      <Image alt={alt} src={imageSrc} layout="fill" objectFit="cover" />
-    </Container>
-  )
-}
+const ProductImage = ({ imageSrc, visible }) => (
+  <Container show={visible} height={{ min: "480px" }}>
+    <Image alt={alt} src={imageSrc} layout="fill" objectFit="cover" />
+  </Container>
+)
 
 export default ProductImage
