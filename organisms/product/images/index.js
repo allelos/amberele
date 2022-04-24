@@ -36,13 +36,7 @@ const ProductImages = ({ images }) => {
       onTouchEnd={onPan("end")}
     >
       {images.map(({ src, id }, index) => (
-        <ProductImage
-          key={id}
-          imageSrc={src}
-          visible={index === currentIndex}
-          onPan={setCurrentIndex}
-          totalImages={images.length}
-        />
+        <ProductImage key={id} imageSrc={src} visible={index === currentIndex} />
       ))}
       <ProductImageThubmnails images={images} onChange={setCurrentIndex} />
     </Flex>
