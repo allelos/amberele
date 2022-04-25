@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document"
 import GoogleAnalytics from "@components/googleAnalytics"
+import CrazyEgg from "@components/crazyEgg"
 
 class MyDocument extends Document {
   render() {
@@ -19,6 +20,7 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
           <GoogleAnalytics />
+          <CrazyEgg />
         </body>
       </Html>
     )
