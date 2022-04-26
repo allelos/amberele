@@ -1,7 +1,8 @@
 import { css } from "@emotion/react"
 import Image from "next/image"
 import Link from "next/link"
-import { Title, Tertiary, Text } from "@components/typography"
+import dynamic from "next/dynamic"
+import { Title, Tertiary, Text, Small } from "@components/typography"
 import { Grid, Column } from "./grid"
 
 const responsiveMixin = css`
@@ -21,10 +22,23 @@ const responsiveMixin = css`
     padding: 48px 16px;
   }
 `
-const Intro = ({ imageSrc, title, subtitle, text, link, label }) => {
+
+const Tooltip = dynamic(() => import("./tooltip"))
+
+const Intro = ({ imageSrc, tooltipLink, title, subtitle, text, link, label }) => {
   return (
     <Grid>
       <Column main position="relative">
+        {tooltipLink && (
+          <Link href={tooltipLink} passHref>
+            <Tooltip as="a">
+              <Small color="white" strong>
+                Cleopatra Macrame Clutch
+              </Small>
+              <Small color="white">80.00 €</Small>
+            </Tooltip>
+          </Link>
+        )}
         <Image src={imageSrc} width={340} height={512} alt="intro-image" layout="responsive" />
       </Column>
       <Column
@@ -37,11 +51,7 @@ const Intro = ({ imageSrc, title, subtitle, text, link, label }) => {
         background="white"
         css={responsiveMixin}
       >
-        {title && (
-          <Title strong>
-            {title}
-          </Title>
-        )}
+        {title && <Title strong>{title}</Title>}
         {subtitle && <Tertiary serif>{subtitle}</Tertiary>}
         {text && <Text>{text}</Text>}
         {link && label && (

@@ -21,6 +21,7 @@ const introText =
   "Η Amberele δημιουργεί μοναδικά κομμάτια εμπνευσμένα από την Ελληνική κουλτούρα, σε boho-chic γραμμές με έναν μοναδικό και περίτεχνο τρόπο, χρησιμοποιώντας την τέχνη του μακραμέ και 100% οργανικά υλικά."
 const introLabel = "Ανακαλυψε ολες τις τσάντες"
 const introImageSrc = "/assets/images/intro.jpg"
+const tooltipLink = "/products/cleopatra-macrame-clutch"
 
 const collectionTitle = "Υψηλής ποιότητας πλεκτές macrame τσάντες"
 const collectionSubtitle =
@@ -40,6 +41,7 @@ const Index = ({ items, pageTitle }) => (
     />
     <Intro
       imageSrc={introImageSrc}
+      tooltipLink={tooltipLink}
       title={introTitle}
       subtitle={introSubtitle}
       text={introText}
