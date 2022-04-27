@@ -3,13 +3,14 @@ import Image from "next/image"
 import Link from "next/link"
 import Flex from "@components/flex"
 import { Text, Small } from "@components/typography"
+import SoldOut from "./soldOut"
 
 const InitialPrice = styled(Small)`
   text-decoration: line-through rgba(0, 0, 0, 0.5);
   color: rgba(0, 0, 0, 0.5);
 `
 
-const Product = ({ title, images, variants, handle }) => {
+const Product = ({ title, images, variants, handle, availableForSale }) => {
   const [image] = images
   const [variant] = variants
 
@@ -21,7 +22,8 @@ const Product = ({ title, images, variants, handle }) => {
 
   return (
     <Link href={productLink} passHref>
-      <Flex as="a" column gap={1}>
+      <Flex as="a" column gap={1} position="relative">
+        {!availableForSale && <SoldOut />}
         <Image alt={alt} src={src} layout="responsive" width={480} height={480} objectFit="cover" />
         <Text strong textTransform="uppercase" small>
           {title}
