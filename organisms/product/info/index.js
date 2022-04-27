@@ -8,10 +8,10 @@ import Variants from "../variants"
 
 const ProductInfo = ({ title, variants, options, descriptionHtml }) => {
   const [variant, setVariant] = useState(0)
-  const { price, compareAtPrice, id } = variants[variant]
+  const { price, compareAtPrice, id, available } = variants[variant]
   const hasVariants = variants.length > 1
 
-  const item = useMemo(() => ({ name: title, price, id }), [title, price, id])
+  const item = useMemo(() => ({ name: title, price, id, available }), [title, price, id, available])
 
   const onChange = useCallback(
     option => {
