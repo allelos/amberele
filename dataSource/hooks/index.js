@@ -1,7 +1,11 @@
 import { useState, useCallback } from "react"
 import { addToCartGAEvent } from "@components/googleAnalytics/gaEvents"
 
-const getExistingCheckoutId = () => localStorage.getItem("checkoutId")
+const getExistingCheckoutId = () => {
+  const checkoutId = localStorage.getItem("checkoutId")
+  if (!checkoutId || checkoutId.includes('gid')) return null
+  return checkoutId
+}
 const setCheckoutId = id => localStorage.setItem("checkoutId", id)
 
 const handleResponse = res => {
