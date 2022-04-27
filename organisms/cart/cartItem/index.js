@@ -26,8 +26,10 @@ const CartItem = ({ id, title, variant, quantity, remove, update }) => {
 
   return (
     <Flex alignItems="center" gap={2}>
-      <Link href={link}>
-        <Image src={src} height={60} width={60} alt={alt} objectFit="cover" />
+      <Link href={link} passHref>
+        <Flex as="a">
+          <Image src={src} height={60} width={60} alt={alt} objectFit="cover" />
+        </Flex>
       </Link>
       <Flex flex column>
         <Text small>{title}</Text>
