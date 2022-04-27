@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import width from "@components/mixins/width"
 import margin from "@components/mixins/margin"
 import padding from "@components/mixins/padding"
+import opacity from "@components/mixins/opacity"
 
 const colorsMap = {
   dark: "#0c242a",
@@ -23,6 +24,7 @@ const Button = styled.button`
   ${getColor}
   ${getPadding}
   ${margin}
+  ${opacity}
 
   font-size: 12px;
   text-align: center;
