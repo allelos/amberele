@@ -1,12 +1,12 @@
 import styled from "@emotion/styled"
+import fontFamily from "@components/mixins/fontFamily"
 import Flex from "@components/flex"
 
 const HtmlBlock = styled(Flex)`
   flex-direction: column;
   font-size: 16px;
-  font-family: Inter, sans-serif;
+  ${fontFamily};
   line-height: 1.6;
-
   letter-spacing: -0.025em;
 
   ul {

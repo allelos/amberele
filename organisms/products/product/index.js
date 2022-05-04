@@ -25,7 +25,7 @@ const Product = ({ title, images, variants, handle, availableForSale }) => {
       <Flex as="a" column gap={1} position="relative">
         {!availableForSale && <SoldOut />}
         <Image alt={alt} src={src} layout="responsive" width={480} height={480} objectFit="cover" />
-        <Text strong textTransform="uppercase" small>
+        <Text textTransform="uppercase" small>
           {title}
         </Text>
         <Flex gap={2}>

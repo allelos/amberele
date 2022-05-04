@@ -1,4 +1,9 @@
+const fontFamilyMap = {
+  serif: "Georgia, serif",
+  sansSerif: "Inter, Arial, sans-serif"
+}
+
 const fontFamily = ({ serif = false }) =>
-  `font-family: ${serif ? "Georgia" : "Inter"}, ${serif ? "serif" : "sans-serif"};`
+  `font-family: ${fontFamilyMap[serif ? "serif" : "sansSerif"]};`
 
 export default fontFamily
