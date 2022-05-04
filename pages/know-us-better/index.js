@@ -116,13 +116,12 @@ const OurStory = ({ relatedProducts }) => {
 export const getStaticProps = async () => {
   const res = await getProducts()
 
-  const relatedProducts = parseResponse(res, []).reduce(
-    (acc, { id, title, handle, images: [image] = {} }) => {
+  const relatedProducts = parseResponse(res, [])
+    .reduce((acc, { id, title, handle, images: [image] = {} }) => {
       acc.push({ id, title, handle, image })
       return acc
-    },
-    []
-  )
+    }, [])
+    .reverse()
 
   return { props: { relatedProducts }, revalidate: 60 }
 }

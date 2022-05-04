@@ -28,13 +28,12 @@ export const getStaticProps = async ({ params: { slug } }) => {
   const [res1, res2] = await Promise.all([getProductByHandle(slug), getProducts()])
 
   const product = parseResponse(res1, {})
-  const relatedProducts = parseResponse(res2, []).reduce(
-    (acc, { id, title, handle, images: [image] = {} }) => {
+  const relatedProducts = parseResponse(res2, [])
+    .reduce((acc, { id, title, handle, images: [image] = {} }) => {
       acc.push({ id, title, handle, image })
       return acc
-    },
-    []
-  )
+    }, [])
+    .reverse()
 
   const { images, title, description: seoDescription } = product
   const [image] = images
