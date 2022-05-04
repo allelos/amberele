@@ -1,10 +1,10 @@
-import { Context } from "@context/index"
+import { Checkout, CheckoutAPI, CheckoutQuantity } from "@context/index"
 import { useCallback, useEffect, useMemo, useState } from "react"
-import useCheckout from "@dataSource/hooks"
+import useClient from "@dataSource/hooks"
 
 const Provider = ({ children }) => {
   const [checkout, setCheckout] = useState({})
-  const [client, loading] = useCheckout()
+  const [client, loading] = useClient()
 
   const memoizedChildren = useMemo(() => children, [children])
 
@@ -14,7 +14,7 @@ const Provider = ({ children }) => {
     client.fetchCheckout(checkoutId, c => setCheckout(c))
   }, [])
 
-  const { id } = checkout
+  const { id, lineItems = [] } = checkout
 
   const action = useCallback(callback => callback(id), [id])
 
@@ -27,17 +27,34 @@ const Provider = ({ children }) => {
   const value = useMemo(
     () => ({
       checkout,
-      addItem,
-      updateItem,
-      removeItem,
-      addDiscount,
-      removeDiscount,
       loading
     }),
     [checkout, loading]
   )
 
-  return <Context.Provider value={value}>{memoizedChildren}</Context.Provider>
+  const api = useMemo(
+    () => ({
+      addItem,
+      updateItem,
+      removeItem,
+      addDiscount,
+      removeDiscount
+    }),
+    [id]
+  )
+
+  const quantity = useMemo(
+    () => lineItems.reduce((acc, item) => acc + item.quantity, 0),
+    [lineItems]
+  )
+
+  return (
+    <CheckoutAPI.Provider value={api}>
+      <Checkout.Provider value={value}>
+        <CheckoutQuantity.Provider value={quantity}>{memoizedChildren}</CheckoutQuantity.Provider>
+      </Checkout.Provider>
+    </CheckoutAPI.Provider>
+  )
 }
 
 export default Provider

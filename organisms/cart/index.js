@@ -1,5 +1,5 @@
-import { useContext, useMemo } from "react"
-import { Context } from "@context/index"
+import { useMemo } from "react"
+import { useCheckout, useCheckoutAPI } from "@context/hooks"
 import Sidebar from "@components/sidebar"
 import Flex from "@components/flex"
 import { Tertiary } from "@components/typography"
@@ -11,9 +11,8 @@ import CartEmpty from "./cartEmpty"
 import CartDiscount from "./cartDiscount"
 
 const Cart = ({ open, onToggle }) => {
-  const { checkout, removeItem, updateItem, loading, addDiscount, removeDiscount } = useContext(
-    Context
-  )
+  const { removeItem, updateItem, addDiscount, removeDiscount } = useCheckoutAPI()
+  const { checkout, loading } = useCheckout()
   const {
     lineItems = [],
     webUrl = "",
@@ -42,7 +41,9 @@ const Cart = ({ open, onToggle }) => {
                   code={code || automaticCode}
                   removeDiscount={removeDiscount}
                 />
-                {!code && !automaticCode && <CartDiscount addDiscount={addDiscount} discountCode={code || automaticCode} />}
+                {!code && !automaticCode && (
+                  <CartDiscount addDiscount={addDiscount} discountCode={code || automaticCode} />
+                )}
                 <Button as="a" href={webUrl} width="100%">
                   ΟΛΟΚΛΗΡΩΣΕ ΤΗΝ ΠΑΡΑΓΓΕΛΙΑ ΣΟΥ
                 </Button>

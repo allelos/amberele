@@ -1,10 +1,9 @@
-import { useContext } from "react"
-import { Context } from "@context/index"
+import { useCheckoutAPI } from "@context/hooks"
 import Flex from "@components/flex"
 import Button from "@components/buttons"
 
 const BuyButton = ({ item, children }) => {
-  const { addItem } = useContext(Context)
+  const { addItem } = useCheckoutAPI()
   const { id, available, ...rest } = item
 
   const onClick = () => available && addItem({ variantId: id, quantity: 1, ...rest })

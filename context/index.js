@@ -1,3 +1,5 @@
 import { createContext } from "react"
 
-export const Context = createContext()
+export const Checkout = createContext()
+export const CheckoutAPI = createContext()
+export const CheckoutQuantity = createContext()

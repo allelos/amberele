@@ -23,7 +23,7 @@ const handleError = ({ setLoading }) => e => {
   console.log("something went wrong", e)
 }
 
-const useCheckout = () => {
+const useClient = () => {
   const [loading, setLoading] = useState()
 
   const createCheckout = useCallback(callback => {
@@ -120,4 +120,4 @@ const useCheckout = () => {
   return [client, loading]
 }
 
-export default useCheckout
+export default useClient
