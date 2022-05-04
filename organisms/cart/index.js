@@ -1,10 +1,11 @@
-import { useMemo } from "react"
+import { useMemo, useCallback, useEffect } from "react"
 import { useCheckout, useCheckoutAPI } from "@context/hooks"
 import Sidebar from "@components/sidebar"
 import Flex from "@components/flex"
 import { Tertiary } from "@components/typography"
 import Icon from "@components/icon"
 import Button from "@components/buttons"
+import { beginCheckoutGAEvent, viewCartGAEvent } from "@components/googleAnalytics/gaEvents"
 import CartItems from "./cartItems"
 import CartDetails from "./cartDetails"
 import CartEmpty from "./cartEmpty"
@@ -23,6 +24,15 @@ const Cart = ({ open, onToggle }) => {
 
   const isEmpty = useMemo(() => !Boolean(lineItems.length), [lineItems])
   const [{ code, title: automaticCode } = {}] = discountApplications
+
+  const beginCheckout = useCallback(() => {
+    beginCheckoutGAEvent({ totalPrice, code: code || automaticCode, items: lineItems })
+  }, [totalPrice, code, automaticCode, lineItems])
+
+  useEffect(() => {
+    if (!open) return
+    viewCartGAEvent({ totalPrice, code: code || automaticCode, items: lineItems })
+  }, [open, totalPrice, code, automaticCode, lineItems])
 
   return (
     <Sidebar open={open} onToggle={onToggle}>
@@ -44,7 +54,7 @@ const Cart = ({ open, onToggle }) => {
                 {!code && !automaticCode && (
                   <CartDiscount addDiscount={addDiscount} discountCode={code || automaticCode} />
                 )}
-                <Button as="a" href={webUrl} width="100%">
+                <Button as="a" href={webUrl} width="100%" onClick={beginCheckout}>
                   ΟΛΟΚΛΗΡΩΣΕ ΤΗΝ ΠΑΡΑΓΓΕΛΙΑ ΣΟΥ
                 </Button>
               </Flex>
