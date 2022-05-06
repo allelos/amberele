@@ -3,7 +3,7 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 
 const seoDescription =
-  "Πλεκτές χειροποίητες μακραμέ (macrame) τσάντες από 100% οργανικά και οικολογικά υλικά (vegan)."
+  "Πλεκτές χειροποίητες τσάντες μακραμέ (macrame) από 100% οργανικά και οικολογικά υλικά (vegan)."
 const seoImageSrc = "/assets/images/hero.jpg"
 
 const getMetaTitle = title => (title ? `Amberele | ${title}` : `Amberele`)

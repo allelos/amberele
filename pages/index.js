@@ -15,7 +15,7 @@ const buttonLabel = "ΑΓΟΡΑ ΤΩΡΑ"
 const link = "/products"
 const imageSrc = "/assets/images/hero.jpg"
 
-const introTitle = "Χειροποίητες macrame τσάντες για κάθε τύπο γυναίκας"
+const introTitle = "Χειροποίητες τσάντες macrame για κάθε τύπο γυναίκας"
 const introSubtitle = "Ένα αξεσουάρ που δεν αποχωρίζεται ποτέ μια γυναίκα"
 const introText =
   "Η Amberele δημιουργεί μοναδικά κομμάτια εμπνευσμένα από την Ελληνική κουλτούρα, σε boho-chic γραμμές με έναν μοναδικό και περίτεχνο τρόπο, χρησιμοποιώντας την τέχνη του μακραμέ και 100% οργανικά υλικά."
