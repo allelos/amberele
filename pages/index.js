@@ -9,8 +9,11 @@ import { getCollectionById, parseResponse } from "@dataSource/index"
 
 const Faq = dynamic(() => import("@organisms/faq"))
 
-const title = "Opulence meets bohemian"
-const subtitle = "Enhance your style with our luxurious, sophisticated & handcrafted creations"
+const titleOld = "Opulence meets bohemian"
+const subtitleOld = "Enhance your style with our luxurious, sophisticated & handcrafted creations"
+
+const title = "Χειροποίητες μακραμέ τσάντες & δημιουργίες"
+const subtitle = "Απογειώστε το στυλ σας με τις εκλεπτυσμένες και χειροποίητες δημιουργίες μας"
 const buttonLabel = "ΑΓΟΡΑ ΤΩΡΑ"
 const link = "/products"
 const imageSrc = "/assets/images/hero.jpg"
